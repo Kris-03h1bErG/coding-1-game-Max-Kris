@@ -1,32 +1,31 @@
 # The goals for this phase include:
-#  - Pick out some icons for your game
-#  - Establish a starting position for each icon
-#  - Pick a size for your playing space
-#  - Print your playing space with starting position of each icon
+# - Pick out some icons for your game
+# - Establish a starting position for each icon
+# - Pick a size for your playing space
+# - Print your playing space with starting position of each icon
 
 # To make this work, you may have to type this into the terminal --> pip install curses
 import curses
 
 game_data = {
-    # Icons
-    # To find more icons go to https://emojipedia.org/
-    "turtle": "\U0001F422",
-    "eagle": "\U0001F985",
-    "obstacle": "\U0001FAA8 ",
-    "leaf": "\U0001F343",
-    "empty": "  ",
-
-    # Board dimensions
     'width': 5,
     'height': 5,
+    'player': {"x": 0, "y": 0, "score": 0, "energy": 10, "max_energy": 10},
+    'eagle_pos': {"x": 4, "y": 4},
+    'collectibles': [
+        {"x": 2, "y": 1, "collected": False},
+    ],
+    'obstacles': [
+        {"x": 1, "y": 2},
+        {"x": 3, "y": 1}
+    ],
 
-    # Icon positions
-    'positions': {
-        'player': (0, 0),
-        'eagle': (4, 4),
-        'obstacle': [(1, 2), (3, 1)],
-        'leaf': [(2, 1)],
-    }
+    # ASCII icons
+    'turtle': "\U0001F422",
+    'eagle_icon': "\U0001F985",
+    'obstacle': "\U0001FAA8 ",
+    'leaf': "\U0001F343",
+    'empty': "  "
 }
 
 def draw_board(stdscr):
@@ -34,27 +33,27 @@ def draw_board(stdscr):
     curses.use_default_colors()
     curses.init_pair(1, curses.COLOR_WHITE, -1)
 
-    width = game_data['width']
-    height = game_data['height']
-    positions = game_data['positions']
-
     stdscr.clear()
-    for y in range(height):
+    for y in range(game_data['height']):
         row = ""
-        for x in range(width):
-            if (x, y) == positions['player']:
+        for x in range(game_data['width']):
+            # Player
+            if x == game_data['player']['x'] and y == game_data['player']['y']:
                 row += game_data['turtle']
-            elif (x, y) == positions['eagle']:
-                row += game_data['eagle']
-            elif (x, y) in positions['obstacle']:
+            # Eagle
+            elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
+                row += game_data['eagle_icon']
+            # Obstacles
+            elif any(o['x'] == x and o['y'] == y for o in game_data['obstacles']):
                 row += game_data['obstacle']
-            elif (x, y) in positions['leaf']:
+            # Collectibles
+            elif any(c['x'] == x and c['y'] == y and not c['collected'] for c in game_data['collectibles']):
                 row += game_data['leaf']
             else:
                 row += game_data['empty']
         stdscr.addstr(y, 0, row, curses.color_pair(1))
 
     stdscr.refresh()
-    stdscr.getkey()  # pause to see board
+    stdscr.getkey()  # pause so player can see board
 
 curses.wrapper(draw_board)

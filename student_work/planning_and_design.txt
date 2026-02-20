@@ -6,12 +6,23 @@ Part I: Planning & Design (15 pts)
 * Sketch a simple plan showing how the game will work step-by-step
 
 Game Idea:
-
+Flappy Bird
+Core goal: Survive as long as possible to get highscores
 
 Game Rules:
-
+- If you hit a green pipe head-on, you die
+- The bird is always flying towards the pipes
+- Passing through a pipe gives +1 score
 
 Major Game Elements:
-
+- Player (bird)
+- Obstacles (green pipes)
+- Goals (highscore)
 
 Gameplay Process:
+- Bird starts on the ground
+- Pressing a button moves your bird up by a certain amount of lines
+- You can always move up, but you must fall to move down
+- Once you inevitably hit a pipe, the bird dies, and if you passed enough pipes, you get a highscore
+
+Code Planning:

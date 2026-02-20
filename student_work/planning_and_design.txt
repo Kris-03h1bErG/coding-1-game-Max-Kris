@@ -31,3 +31,8 @@ Code Planning:
 - Figure out how to randomize the pipes (large dictionary it picks from?)
 - Figure out how to make the bird jump lines if a button is pressed
 - Figure out how to make a button always be able to be pressed
+
+- Import (Random time and curses)
+- Main dict one for player data and one for randomized pipes 
+- define with our funcion 
+- call main game loop 

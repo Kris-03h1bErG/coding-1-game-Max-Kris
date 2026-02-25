@@ -27,6 +27,9 @@ Gameplay Process:
 
 Code Planning:
 - Figure out what emojis we need
+ U+1F426 aka birb
+ U+2601  cloud
+
 - Figure out how to color the backgrounds of strings
 - Figure out how to randomize the pipes (large dictionary it picks from?)
 - Figure out how to make the bird jump lines if a button is pressed
@@ -36,3 +39,6 @@ Code Planning:
 - Main dict one for player data and one for randomized pipes 
 - define with our funcion 
 - call main game loop 
+
+stdscr.clear() # tries to clear terminal
+stdscr.getkey() # waits so player can see 

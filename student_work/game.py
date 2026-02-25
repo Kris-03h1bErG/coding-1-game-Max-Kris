@@ -3,6 +3,13 @@ import curses
 import time
 game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
+    'width': 15,
+    'height': 15,
+    'player': {"x": 7, "y": 15, "score": 0,}
+
+    #ASCII icons
+    
+    
 }
 
 def draw_board():

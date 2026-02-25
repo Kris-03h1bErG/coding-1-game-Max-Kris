@@ -22,6 +22,7 @@ game_data = {
 }
 
 def random_player(icon_list)
+    return random.choice(icon_list)
 
 
 def draw_board(stdscr):
@@ -35,7 +36,7 @@ def draw_board(stdscr):
         for x in range(game_data['width']):
             # Random player
             if x == game_data['player']['x'] and y == game_data['player']['y']:
-                row += game_data['turtle']
+                row += random_player(game_data["icons"])
             # Eagle
             elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
                 row += game_data['eagle_icon']

@@ -37,9 +37,10 @@ def draw_board(stdscr):
             # Random player
             if x == game_data['player']['x'] and y == game_data['player']['y']:
                 row += random_player(game_data["icons"])
-            # Eagle
-            elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
-                row += game_data['eagle_icon']
+            # Pipes
+            # elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
+            #     row += game_data['eagle_icon']
+            # Blue sky stuff
             else:
                 row += game_data['sky']
         stdscr.addstr(y, 0, row, curses.color_pair(1))

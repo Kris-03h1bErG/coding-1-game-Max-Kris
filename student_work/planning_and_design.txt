@@ -42,3 +42,9 @@ Code Planning:
 
 stdscr.clear() # tries to clear terminal
 stdscr.getkey() # waits so player can see 
+curses.start_color() # basic initalization needed for colors
+curses.use_default_colors() # specifies to use the defult color 1-8 
+curses.init_pair(1, curses.COLOR_WHITE, -1) # sets foreground and letter color 
+# arguments is always a setup 1 ,curses.COLOR_WHITE specifies the color and 1-8 is background color  
+curses.wrapper(function_name) # needed to run function without breaking terminal
+curses.addstr(str) adds a string at current location of cursur in terminal 

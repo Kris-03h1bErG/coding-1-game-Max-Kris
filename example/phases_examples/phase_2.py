@@ -53,7 +53,7 @@ def draw_board(stdscr):
                 row += game_data['empty']
         stdscr.addstr(y, 0, row, curses.color_pair(1))
 
-    stdscr.refresh()
+    stdscr.refresh() 
     stdscr.getkey()  # pause so player can see board
 
 curses.wrapper(draw_board)

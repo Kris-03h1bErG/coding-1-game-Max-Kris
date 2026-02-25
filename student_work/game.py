@@ -5,8 +5,8 @@ import random
 
 game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
-    'width': 15,
-    'height': 15,
+    'width': 7,
+    'height': 10,
     'player': {"x": 7, "y": 15, "score": 0,} , 
 
     #ASCII icons

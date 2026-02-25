@@ -7,7 +7,7 @@ game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
     'width': 15,
     'height': 15,
-    'player': {"x": 7, "y": 15, "score": 0,}
+    'player': {"x": 7, "y": 15, "score": 0,} , 
 
     #ASCII icons
 
@@ -21,7 +21,7 @@ game_data = {
     
 }
 
-def random_player(icon_list)
+def random_player(icon_list):
     return random.choice(icon_list)
 
 

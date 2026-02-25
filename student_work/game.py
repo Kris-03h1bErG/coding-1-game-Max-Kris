@@ -1,6 +1,8 @@
 # Write your game here
 import curses
 import time
+import random 
+
 game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
     'width': 15,
@@ -15,16 +17,12 @@ game_data = {
     "empty": "  ",
 
         # Random Players
-    'japan': "U+1F5FE",
-    'hotel': "U+1F3E8", 
-    "bball": "U+1F3C0",
-    "caution_sign": "U+1F6A7",
-    "pencil": "U+270F",
-    "palette": "U+1F3A8",
-    "top_hat": "U+1F3A9"
-    
+    "icons": {'japan': "U+1F5FE", 'hotel': "U+1F3E8", "bball": "U+1F3C0", "caution_sign": "U+1F6A7", "pencil": "U+270F", "palette": "U+1F3A8", "top_hat": "U+1F3A9"}
     
 }
+
+def random_player(icon_list)
+
 
 def draw_board(stdscr):
     curses.start_color()
@@ -42,7 +40,7 @@ def draw_board(stdscr):
             elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
                 row += game_data['eagle_icon']
             else:
-                row += game_data['empty']
+                row += game_data['sky']
         stdscr.addstr(y, 0, row, curses.color_pair(1))
 
     stdscr.refresh()

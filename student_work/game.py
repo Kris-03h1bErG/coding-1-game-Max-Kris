@@ -12,12 +12,12 @@ game_data = {
     #ASCII icons
 
         # Blocks
-    'pipe': "U+1F7E9",
-    "sky": "U+1F7E6",
+    'pipe': "\U0001F7E9",
+    "sky": "\U0001F7E6",
     "empty": "  ",
 
         # Random Players
-    "icons": {'japan': "U+1F5FE", 'hotel': "U+1F3E8", "bball": "U+1F3C0", "caution_sign": "U+1F6A7", "pencil": "U+270F", "palette": "U+1F3A8", "top_hat": "U+1F3A9"}
+    "icons": {'japan': "\U0001F5FE", 'hotel': "\U0001F3E8", "bball": "\U0001F3C0", "caution_sign": "\U0001F6A7", "pencil": "\u270F", "palette": "\U0001F3A8", "top_hat": "\U0001F3A9"}
     
 }
 

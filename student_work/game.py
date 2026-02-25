@@ -8,6 +8,20 @@ game_data = {
     'player': {"x": 7, "y": 15, "score": 0,}
 
     #ASCII icons
+
+        # Blocks
+    'pipe': "U+1F7E9",
+    "sky": "U+1F7E6",
+    "empty": "  ",
+
+        # Random Players
+    'japan': "U+1F5FE",
+    'hotel': "U+1F3E8", 
+    "bball": "U+1F3C0",
+    "caution_sign": "U+1F6A7",
+    "pencil": "U+270F",
+    "palette": "U+1F3A8",
+    "top_hat": "U+1F3A9"
     
     
 }

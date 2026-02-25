@@ -26,11 +26,26 @@ game_data = {
     
 }
 
-def draw_board():
-    for i in range(15):
-        print("H E L L O W O R L D H E L L O")
-    print("Random stats")
-    print("Random stats")
-    print("Random stats")
-# time.sleep(2)
-draw_board()
+def draw_board(stdscr):
+    curses.start_color()
+    curses.use_default_colors()
+    curses.init_pair(1, curses.COLOR_WHITE, -1)
+
+    stdscr.clear()
+    for y in range(game_data['height']):
+        row = ""
+        for x in range(game_data['width']):
+            # Random player
+            if x == game_data['player']['x'] and y == game_data['player']['y']:
+                row += game_data['turtle']
+            # Eagle
+            elif x == game_data['eagle_pos']['x'] and y == game_data['eagle_pos']['y']:
+                row += game_data['eagle_icon']
+            else:
+                row += game_data['empty']
+        stdscr.addstr(y, 0, row, curses.color_pair(1))
+
+    stdscr.refresh()
+    stdscr.getkey()  # pause so player can see board
+
+curses.wrapper(draw_board)

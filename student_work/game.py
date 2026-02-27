@@ -86,10 +86,19 @@ def draw_board(stdscr):
 
     stdscr.refresh() 
 
+def pipe_movement():
+    direction = (-1, 0)
+    ex = p['x'] for p in game_data['pipes']
 
+    for dx in direction:
+        new_x = ex + dx
+        if 0 <= new_x < game_data['width']:
+            for p in game_data['pipes']:
+                game_data['pipes']['x'] = new_x
+                break
 
 def run_game(stdscr):
-    curses.curs_set(0) # sets coursor to invisible 
+    curses.curs_set(0) # sets cursor to invisible 
     stdscr.nodelay(True) # allows inputs now 
 
     draw_board(stdscr) # prints board 

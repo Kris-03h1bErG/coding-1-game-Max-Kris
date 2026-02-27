@@ -85,9 +85,8 @@ def draw_board(stdscr):
         stdscr.addstr(y, 0, row, curses.color_pair(1)) # adds row string with the normal color pair to screen
 
     stdscr.refresh() 
-    stdscr.getkey()  # pause so player can see board
 
-curses.wrapper(draw_board)
+
 
 def run_game(stdscr):
     curses.curs_set(0) # sets coursor to invisible 
@@ -99,7 +98,10 @@ def run_game(stdscr):
             key = stdscr.getkey()
         except: #basic data filterin
             key = None
-        if key.lower() == "q": # if input is q then break
-            break
-        draw_board(stdscr)
-        move_player(key)
+        if key:
+            if key.lower() == "q": # if input is q then break
+                break
+
+            draw_board(key)
+            move_player(stdscr)
+curses.wrapper(run_game)

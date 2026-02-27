@@ -48,10 +48,19 @@ def random_player(icon_list , number):
     return random.choice(list(icon_list.values()))
 
 def move_player(key):
+
+    x = game_data['player']['x']
+    y = game_data['player']['y']
+    new_x, new_y = x, y
+    key = key.lower()
+
     if key == "w" and y > 0: #checks player input and  changes according vlaues 
         new_y -= 1
     else:
         return #change this to make the player fall a certain amount in a certain period of time
+
+    game_data['player']['x'] = new_x
+    game_data['player']['y'] = new_y
 
 
 def draw_board(stdscr):

@@ -61,14 +61,14 @@ def draw_board(stdscr):
                   curses.color_pair(1))
     stdscr.refresh()
 
-def move_player(key):
-    x = game_data['player']['x']
+def move_player(key): #new def
+    x = game_data['player']['x'] # creates x and y values from dict 
     y = game_data['player']['y']
 
-    new_x, new_y = x, y
-    key = key.lower()
+    new_x, new_y = x, y # creates new values from old x and y values
+    key = key.lower() # gets input from player 
 
-    if key == "w" and y > 0:
+    if key == "w" and y > 0: #checks player input and  changes acoridng vlaues 
         new_y -= 1
     elif key == "s" and y < game_data['height'] - 1:
         new_y += 1
@@ -79,28 +79,28 @@ def move_player(key):
     else:
         return  # Invalid key or move off board
 
-    # Check for obstacles
+    # Check for obstacles if 
     if any(o['x'] == new_x and o['y'] == new_y for o in game_data['obstacles']):
         return
-
+    # if new position is taken returns none and dosnt change player location 
     # Update position and increment score
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
-    game_data['player']['score'] += 1
+    game_data['player']['score'] += 1 # updates dict values
 
 def main(stdscr):
-    curses.curs_set(0)
-    stdscr.nodelay(True)
+    curses.curs_set(0) # sets coursor to invisible 
+    stdscr.nodelay(True) # allows inputs now 
 
-    draw_board(stdscr)
+    draw_board(stdscr) # prints board 
 
-    while True:
+    while True: # always gets player input but if its a invalid input it just sets it to none
         try:
             key = stdscr.getkey()
         except:
             key = None
 
-        if key:
+        if key: # if its q then it stops playing game 
             if key.lower() == "q":
                 break
 

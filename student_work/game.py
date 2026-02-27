@@ -1,4 +1,5 @@
-# Write your game here
+# Copy this python3 game.py
+# Ripoff flappybird
 import curses
 import time
 import random 
@@ -25,6 +26,7 @@ game_data = {
             "palette": "\U0001F3A8", 
             "top_hat": "\U0001F3A9" 
         }
+    
     
 }
 

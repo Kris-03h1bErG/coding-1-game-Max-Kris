@@ -56,7 +56,7 @@ def move_player(stdscr , key):
 
     if key == "w" and y > 0: #checks player input and  changes according vlaues 
         new_y -= 1
-    else:
+    else: #every other key moves down to avoid a cheat to stay floating
         new_y += 1
 
     if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
@@ -67,21 +67,21 @@ def move_player(stdscr , key):
 
 
 def draw_board(stdscr):
-    curses.start_color() # inizilaze requiremnets for color
+    curses.start_color() # initialize requirements for color
     curses.use_default_colors() # Checks for terminals normal color scheme  
     curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_CYAN) # sets up basic color scheme
     stdscr.clear() # sets up termninal to look like game 
-    for y in range(game_data['height'] + 1): #itterates through hight in dict (10) 
+    for y in range(game_data['height'] + 1): #iterates through hight in dict (10) 
         row = ""
-        for x in range(game_data['width'] + 1): #itterates through width in dict (7)
+        for x in range(game_data['width'] + 1): #iterates through width in dict (7)
             # Random player
             if x == game_data['player']['x'] and y == game_data['player']['y']: #checks if XY equals players x and y 
                 row += random_player(game_data["icons"], game_data["player"]["seed"]) #then  adds player icon to str
-                #row += " " #just helps readability 
+                # Space in code for readability
             # Pipes
             elif any(p['x'] == x and p['y'] == y for p in game_data['pipes']):
                 row += game_data['pipe']
-            # Blue sky stuff
+            # Blue sky stuff (I don't think this is actually used)
             else: # need to add more elif's to display more 
                 row += game_data['sky'] #adds skys dict value to the string
                 row += " " #just helps readability  
@@ -90,15 +90,13 @@ def draw_board(stdscr):
     stdscr.refresh() 
 
 def pipe_movement():
-    direction = (-1, 0)
-    ex = p['x'] for p in game_data['pipes']
-
-    for dx in direction:
-        new_x = ex + dx
-        if 0 <= new_x < game_data['width']:
-            for p in game_data['pipes']:
-                game_data['pipes']['x'] = new_x
-                break
+    ex = game_data['pipes'][0]['x']
+    if ex > 0:
+        for p in game_data['pipes']:
+            p['x'] += 1
+    else:
+        for p in game_data['pipes']:
+            p['x'] = 7
 
 def run_game(stdscr):
     curses.curs_set(0) # sets cursor to invisible 
@@ -116,4 +114,6 @@ def run_game(stdscr):
 
             draw_board(stdscr)
             move_player(stdscr , key)
+            pipe_movement()
+            
 curses.wrapper(run_game)

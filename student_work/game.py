@@ -47,7 +47,7 @@ def random_player(icon_list , number):
     # print(random.choice(icon_list.keys))
     return random.choice(list(icon_list.values()))
 
-def move_player(stdscr , key):
+def move_player(key):
 
     x = game_data['player']['x']
     y = game_data['player']['y']
@@ -60,8 +60,6 @@ def move_player(stdscr , key):
     else: #every other key moves down to avoid a cheat to stay floating
         new_y += 1
 
-    # if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
-    #     return
     if new_y == -1: 
         new_y = 0
     elif new_y == 11:
@@ -70,7 +68,8 @@ def move_player(stdscr , key):
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
 
-
+    if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
+        break
 
 def draw_board(stdscr):
     curses.start_color() # initialize requirements for color
@@ -118,8 +117,8 @@ def run_game(stdscr):
             if key.lower() == "q": # if input is q then break
                 break
 
+            move_player(key)
             draw_board(stdscr)
-            move_player(stdscr , key)
             pipe_movement()
             time.sleep(.2)
             

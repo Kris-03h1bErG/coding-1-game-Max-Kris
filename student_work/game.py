@@ -54,16 +54,22 @@ def move_player(stdscr , key):
     new_x, new_y = x, y
     key = key.lower()
 
-    if key == "w" and y > 0: #checks player input and  changes according vlaues 
-        new_y -= 1
+    if key == "w": #checks player input and  changes according vlaues 
+        #stdscr.addstr(y, 15, 0, new_y)
+        new_y -= 1 
     else: #every other key moves down to avoid a cheat to stay floating
         new_y += 1
 
-    if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
-        return
-
+    # if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
+    #     return
+    if new_y == -1: 
+        new_y = 0
+    elif new_y == 11:
+        new_y = 10
+        
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
+
 
 
 def draw_board(stdscr):
@@ -93,7 +99,7 @@ def pipe_movement():
     ex = game_data['pipes'][0]['x']
     if ex > 0:
         for p in game_data['pipes']:
-            p['x'] += 1
+            p['x'] -= 1
     else:
         for p in game_data['pipes']:
             p['x'] = 7
@@ -115,5 +121,6 @@ def run_game(stdscr):
             draw_board(stdscr)
             move_player(stdscr , key)
             pipe_movement()
+            time.sleep(.2)
             
 curses.wrapper(run_game)

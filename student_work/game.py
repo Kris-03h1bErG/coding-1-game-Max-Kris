@@ -8,7 +8,7 @@ game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
     'width': 7,
     'height': 10,
-    'player': {"x": 0, "y": 10, "score": 0, "seed" : random.randint(1,100)} , 
+    'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
 
     'pipes': [
         {"x": 7, "y": 0},
@@ -47,7 +47,7 @@ def random_player(icon_list , number):
     # print(random.choice(icon_list.keys))
     return random.choice(list(icon_list.values()))
 
-def move_player(key):
+def move_player(stdscr , key):
 
     x = game_data['player']['x']
     y = game_data['player']['y']
@@ -57,7 +57,10 @@ def move_player(key):
     if key == "w" and y > 0: #checks player input and  changes according vlaues 
         new_y -= 1
     else:
-        return #change this to make the player fall a certain amount in a certain period of time
+        new_y += 1
+
+    if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
+        return
 
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
@@ -111,6 +114,6 @@ def run_game(stdscr):
             if key.lower() == "q": # if input is q then break
                 break
 
-            draw_board(key)
-            move_player(stdscr)
+            draw_board(stdscr)
+            move_player(stdscr , key)
 curses.wrapper(run_game)

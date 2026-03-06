@@ -123,7 +123,7 @@ def run_game(stdscr):
             time.sleep(.2)
             
 curses.wrapper(run_game)
-
+ def 
 def reset_dict(dict)
     dict = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
@@ -158,4 +158,4 @@ def reset_dict(dict)
             "palette": "\U0001F3A8", 
             "top_hat": "\U0001F3A9",
         }
-}
+    }

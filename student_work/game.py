@@ -39,6 +39,50 @@ game_data = {
         }
 
 }
+# def reset_dict(dict):
+#     dict = {
+#     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
+#     'width': 7,
+#     'height': 10,
+#     'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
+
+#     'pipes': [
+#         {"x": 7, "y": 0},
+#         {"x": 7, "y": 1},
+#         {"x": 7, "y": 2},
+#         {"x": 7, "y": 3},
+#         {"x": 7, "y": 7},
+#         {"x": 7, "y": 8},
+#         {"x": 7, "y": 9},
+#         {"x": 7, "y": 10}
+#     ],
+
+#     #ASCII icons
+#         # Blocks
+#     'pipe': "\U0001F7E9", #weird green 
+#     'sky' : " ", #"sky": "\U0001F7E6",  #weird blue 
+#     "empty":  "Lorsum Ipsum idk?", # this is empty for now 
+
+#         # Random Players just a large dict of emojis for player 
+#     "icons": {
+#             'japan': "\U0001F5FE",
+#             'hotel': "\U0001F3E8", 
+#             "bball": "\U0001F3C0", 
+#             "caution_sign": "\U0001F6A7", 
+#             #"pencil": "\u270F",  for some reason is slightly shorter than the rest?
+#             "palette": "\U0001F3A8", 
+#             "top_hat": "\U0001F3A9",
+#         }
+#     }
+
+# def player_died():
+#     global game_data
+#     game_data = reset_dict(game_data)
+#     time.sleep(2)
+#     curses.wrapper(run_game)
+
+
+
 
 def random_player(icon_list , number):
     random.seed(number)
@@ -68,8 +112,8 @@ def move_player(key):
     game_data['player']['x'] = new_x
     game_data['player']['y'] = new_y
 
-    if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']):
-        exit()
+    # if any(o['x'] == new_x and o['y'] == new_y for o in game_data['pipes']) or game_data["player"]["y"] == 11:
+    #     exit
 
 def draw_board(stdscr):
     curses.start_color() # initialize requirements for color
@@ -93,7 +137,6 @@ def draw_board(stdscr):
         stdscr.addstr(y, 0, row, curses.color_pair(1)) # adds row string with the normal color pair to screen
 
     stdscr.refresh() 
-
 def pipe_movement():
     ex = game_data['pipes'][0]['x']
     if ex > 0:
@@ -120,42 +163,8 @@ def run_game(stdscr):
             move_player(key)
             draw_board(stdscr)
             pipe_movement()
+            if any(o['x'] == game_data["player"]["x"] and o['y'] == game_data["player"]["y"] for o in game_data['pipes']) or game_data["player"]["y"] == 10:
+                break
             time.sleep(.2)
             
 curses.wrapper(run_game)
- def 
-def reset_dict(dict)
-    dict = {
-    # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
-    'width': 7,
-    'height': 10,
-    'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
-
-    'pipes': [
-        {"x": 7, "y": 0},
-        {"x": 7, "y": 1},
-        {"x": 7, "y": 2},
-        {"x": 7, "y": 3},
-        {"x": 7, "y": 7},
-        {"x": 7, "y": 8},
-        {"x": 7, "y": 9},
-        {"x": 7, "y": 10}
-    ],
-
-    #ASCII icons
-        # Blocks
-    'pipe': "\U0001F7E9", #weird green 
-    'sky' : " ", #"sky": "\U0001F7E6",  #weird blue 
-    "empty":  "Lorsum Ipsum idk?", # this is empty for now 
-
-        # Random Players just a large dict of emojis for player 
-    "icons": {
-            'japan': "\U0001F5FE",
-            'hotel': "\U0001F3E8", 
-            "bball": "\U0001F3C0", 
-            "caution_sign": "\U0001F6A7", 
-            #"pencil": "\u270F",  for some reason is slightly shorter than the rest?
-            "palette": "\U0001F3A8", 
-            "top_hat": "\U0001F3A9",
-        }
-    }

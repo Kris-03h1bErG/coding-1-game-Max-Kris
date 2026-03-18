@@ -9,13 +9,6 @@ game_data = {
     'width': 7,
     'height': 10,
     'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    'pipes': [
-=======
-=======
->>>>>>> 09835e7 (gfvgvfygk)
     'pipe_seed' : random.randint(0,4),
     'pipes': [ 
     [
@@ -62,7 +55,6 @@ game_data = {
     ],
 
     [
->>>>>>> 09835e7 (gfvgvfygk)
         {"x": 7, "y": 0},
         {"x": 7, "y": 1},
         {"x": 7, "y": 2},
@@ -72,15 +64,9 @@ game_data = {
         {"x": 7, "y": 9},
         {"x": 7, "y": 10}
     ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 09835e7 (gfvgvfygk)
          ],
 
  
->>>>>>> 09835e7 (gfvgvfygk)
 
     #ASCII icons
         # Blocks
@@ -210,6 +196,7 @@ def pipe_movement():
         for i in range(0,4):
             for p in game_data['pipes'][i]:
                 p['x'] = 7
+    random.seed(random.randint(1,1000))
     game_data['pipe_seed'] = random.randint(0,4)
 
 

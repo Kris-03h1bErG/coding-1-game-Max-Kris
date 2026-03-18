@@ -9,62 +9,17 @@ game_data = {
     'width': 7,
     'height': 10,
     'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
-    'random_pipe_number': 1,
-    'pipes': [ 
-    [
-        {"x": 7, "y": 0}, # normal 
-        {"x": 7, "y": 1},
-        {"x": 7, "y": 2},
-        {"x": 7, "y": 3},
-        {"x": 7, "y": 7},
-        {"x": 7, "y": 8},
-        {"x": 7, "y": 9},
-        {"x": 7, "y": 10} 
-    ],
-    [
-        {"x": 7, "y": 0}, # slightly lower
-        {"x": 7, "y": 1},
-        {"x": 7, "y": 2},
-        {"x": 7, "y": 3},
-        {"x": 7, "y": 4},
-        {"x": 7, "y": 5},
-        {"x": 7, "y": 9},
-        {"x": 7, "y": 10} 
-    ],
 
-    [
-        {"x": 7, "y": 3}, # need to be high 
-        {"x": 7, "y": 4},
-        {"x": 7, "y": 5},
-        {"x": 7, "y": 6},
-        {"x": 7, "y": 7},
-        {"x": 7, "y": 8},
-        {"x": 7, "y": 9},
-        {"x": 7, "y": 10} 
-    ],
-
-    [
-        {"x": 7, "y": 0}, # low
-        {"x": 7, "y": 1},
-        {"x": 7, "y": 2},
-        {"x": 7, "y": 3},
-        {"x": 7, "y": 4},
-        {"x": 7, "y": 5},
-        {"x": 7, "y": 6},
-        {"x": 7, "y": 7} 
-    ],
-
-    [
+    'pipes': [
         {"x": 7, "y": 0},
-        {"x": 7, "y": 1}, # sligtly higher 
-        {"x": 7, "y": 5},
-        {"x": 7, "y": 6},
+        {"x": 7, "y": 1},
+        {"x": 7, "y": 2},
+        {"x": 7, "y": 3},
         {"x": 7, "y": 7},
         {"x": 7, "y": 8},
         {"x": 7, "y": 9},
-        {"x": 7, "y": 10} 
+        {"x": 7, "y": 10}
     ],
-         ],
 
     #ASCII icons
         # Blocks
@@ -173,7 +128,7 @@ def draw_board(stdscr):
                 row += random_player(game_data["icons"], game_data["player"]["seed"]) #then  adds player icon to str
                 # Space in code for readability
             # Pipes
-            elif any(p['x'] == x and p['y'] == y for p in game_data['pipes'][game_data['random_pipe_number']]):
+            elif any(p['x'] == x and p['y'] == y for p in game_data['pipes']):
                 row += game_data['pipe']
             # Blue sky stuff (I don't think this is actually used)
             else: # need to add more elif's to display more 
@@ -182,25 +137,14 @@ def draw_board(stdscr):
         stdscr.addstr(y, 0, row, curses.color_pair(1)) # adds row string with the normal color pair to screen
 
     stdscr.refresh() 
-
-def reset_pipes():
-    for p in game_data['pipes']:
-        for coordinate in p:
-            if coordinate['x'] < 0:
-                game_data['random_pipe_number'] = random.randint(0, 4)
-
-
-
 def pipe_movement():
-    for i in range(1000000):
-        ex = game_data['pipes'][game_data['random_pipe_number']]['x']
-        if ex > 0:
-            for p in game_data['pipes'][game_data['random_pipe_number']]:
-                p['x'] -= 1
-        else:
-            for p in game_data['pipes'][game_data['random_pipe_number']]:
-                p['x'] = 7
-                continue
+    ex = game_data['pipes'][0]['x']
+    if ex > 0:
+        for p in game_data['pipes']:
+            p['x'] -= 1
+    else:
+        for p in game_data['pipes']:
+            p['x'] = 7
 
 def run_game(stdscr):
     curses.curs_set(0) # sets cursor to invisible 

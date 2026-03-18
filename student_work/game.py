@@ -10,9 +10,12 @@ game_data = {
     'height': 10,
     'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     'pipes': [
 =======
+=======
+>>>>>>> 09835e7 (gfvgvfygk)
     'pipe_seed' : random.randint(0,4),
     'pipes': [ 
     [
@@ -70,7 +73,10 @@ game_data = {
         {"x": 7, "y": 10}
     ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 09835e7 (gfvgvfygk)
          ],
 
  

@@ -9,8 +9,57 @@ game_data = {
     'width': 7,
     'height': 10,
     'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
+<<<<<<< HEAD
 
     'pipes': [
+=======
+    'pipe_seed' : random.randint(0,4),
+    'pipes': [ 
+    [
+        {"x": 7, "y": 0}, # normal 
+        {"x": 7, "y": 1},
+        {"x": 7, "y": 2},
+        {"x": 7, "y": 3},
+        {"x": 7, "y": 7},
+        {"x": 7, "y": 8},
+        {"x": 7, "y": 9},
+        {"x": 7, "y": 10} 
+    ],
+    [
+        {"x": 7, "y": 0}, # slightly lower
+        {"x": 7, "y": 1},
+        {"x": 7, "y": 2},
+        {"x": 7, "y": 3},
+        {"x": 7, "y": 4},
+        {"x": 7, "y": 5},
+        {"x": 7, "y": 9},
+        {"x": 7, "y": 10} 
+    ],
+
+    [
+        {"x": 7, "y": 3}, # need to be high 
+        {"x": 7, "y": 4},
+        {"x": 7, "y": 5},
+        {"x": 7, "y": 6},
+        {"x": 7, "y": 7},
+        {"x": 7, "y": 8},
+        {"x": 7, "y": 9},
+        {"x": 7, "y": 10} 
+    ],
+
+    [
+        {"x": 7, "y": 0}, # low
+        {"x": 7, "y": 1},
+        {"x": 7, "y": 2},
+        {"x": 7, "y": 3},
+        {"x": 7, "y": 4},
+        {"x": 7, "y": 5},
+        {"x": 7, "y": 6},
+        {"x": 7, "y": 7} 
+    ],
+
+    [
+>>>>>>> 09835e7 (gfvgvfygk)
         {"x": 7, "y": 0},
         {"x": 7, "y": 1},
         {"x": 7, "y": 2},
@@ -20,6 +69,12 @@ game_data = {
         {"x": 7, "y": 9},
         {"x": 7, "y": 10}
     ],
+<<<<<<< HEAD
+=======
+         ],
+
+ 
+>>>>>>> 09835e7 (gfvgvfygk)
 
     #ASCII icons
         # Blocks
@@ -127,8 +182,8 @@ def draw_board(stdscr):
             if x == game_data['player']['x'] and y == game_data['player']['y']: #checks if XY equals players x and y 
                 row += random_player(game_data["icons"], game_data["player"]["seed"]) #then  adds player icon to str
                 # Space in code for readability
-            # Pipes
-            elif any(p['x'] == x and p['y'] == y for p in game_data['pipes']):
+            # Pipes                                                         #need to get same pipe each time 
+            elif any(p['x'] == x and p['y'] == y for p in game_data['pipes'][game_data['pipe_seed']]):
                 row += game_data['pipe']
             # Blue sky stuff (I don't think this is actually used)
             else: # need to add more elif's to display more 
@@ -138,13 +193,19 @@ def draw_board(stdscr):
 
     stdscr.refresh() 
 def pipe_movement():
-    ex = game_data['pipes'][0]['x']
+
+    ex = game_data['pipes'][0][game_data['pipe_seed']]['x']
     if ex > 0:
-        for p in game_data['pipes']:
+        for p in game_data['pipes'][game_data['pipe_seed']]:
             p['x'] -= 1
     else:
-        for p in game_data['pipes']:
-            p['x'] = 7
+        for p in game_data['pipes'][game_data['pipe_seed']]:
+            p['x'] = 7    
+        for i in range(0,4):
+            for p in game_data['pipes'][i]:
+                p['x'] = 7
+    game_data['pipe_seed'] = random.randint(0,4)
+
 
 def run_game(stdscr):
     curses.curs_set(0) # sets cursor to invisible 
@@ -163,8 +224,9 @@ def run_game(stdscr):
             move_player(key)
             draw_board(stdscr)
             pipe_movement()
-            if any(o['x'] == game_data["player"]["x"] and o['y'] == game_data["player"]["y"] for o in game_data['pipes']) or game_data["player"]["y"] == 10:
+            if any(o['x'] == game_data["player"]["x"] and o['y'] == game_data["player"]["y"] for o in game_data['pipes'][game_data['pipe_seed']]) or game_data["player"]["y"] == 10:
                 break
             time.sleep(.2)
             
 curses.wrapper(run_game)
+#pipe_movement()

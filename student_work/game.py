@@ -10,6 +10,15 @@ game_data = {
     'height': 10,
     'player': {"x": 2, "y": 5, "score": 0, "seed" : random.randint(1,100)} , 
     'pipe_seed' : random.randint(0,4),
+    'pipes_order' : [   [random.randint(0,4) , random.randint(0,4) , random.randint(0,4) , random.randint(0,4)],
+                        [random.randint(0,4) , random.randint(0,4) , random.randint(0,4) , random.randint(0,4)],
+                        [random.randint(0,4) , random.randint(0,4) , random.randint(0,4) , random.randint(0,4)], 
+                        [random.randint(0,4) , random.randint(0,4) , random.randint(0,4) , random.randint(0,4)],
+                        [random.randint(0,4) , random.randint(0,4) , random.randint(0,4) , random.randint(0,4)] 
+                    ]
+    'next_order' : [ random.randint(0,4) , random.randint(0,4) , random.randint(0,4) , random.randint(0,4) ]
+    'current_pipe' : 
+    'next_pipe': 
     'pipes': [ 
     [
         {"x": 7, "y": 0}, # normal 
@@ -185,26 +194,24 @@ def draw_board(stdscr):
 
     stdscr.refresh() 
 def pipe_movement():
-
-    ex = game_data['pipes'][0][game_data['pipe_seed']]['x']
-    if ex > 0:
-        for p in game_data['pipes'][game_data['pipe_seed']]:
+    curent_pipes = game_data["pipes"][game_data["pipe_seed"]]
+    if curent_pipes[0]["x"] > 0:
+        for p in curent_pipes:
             p['x'] -= 1
     else:
-        for p in game_data['pipes'][game_data['pipe_seed']]:
-            p['x'] = 7    
-        for i in range(0,4):
-            for p in game_data['pipes'][i]:
-                p['x'] = 7
-    random.seed(random.randint(1,1000))
-    game_data['pipe_seed'] = random.randint(0,4)
+        for p in curent_pipes:
+            p['x'] = 7
+    
+        
+    # random.seed(random.randint(1,1000))
+    # game_data['pipe_seed'] = random.randint(0,4)
 
 
 def run_game(stdscr):
     curses.curs_set(0) # sets cursor to invisible 
     stdscr.nodelay(True) # allows inputs now 
 
-    draw_board(stdscr) # prints board 
+    #draw_board(stdscr) # prints board 
     while True:
         try: 
             key = stdscr.getkey()

@@ -141,7 +141,7 @@ def draw_board(stdscr):
                 row += random_player(game_data["icons"], game_data["player"]["seed"]) #then  adds player icon to str
                 # Space in code for readability
             # Pipes                                                         #need to get same pipe each time 
-            elif any(p['x'] == x and p['y'] == y for p in game_data['pipes'][game_data['next_pipe'][1]]):
+            elif any(p['x'] == x and p['y'] == y for p in game_data['pipes'][game_data['next_pipe'][0]]):
                 row += game_data['pipe']
             # Blue sky stuff (I don't think this is actually used)
             else: # need to add more elif's to display more 
@@ -151,7 +151,7 @@ def draw_board(stdscr):
 
     stdscr.refresh() 
 def pipe_movement():
-    curent_pipes = game_data["pipes"][game_data["next_pipe"][1]]
+    curent_pipes = game_data["pipes"][game_data["next_pipe"][0]]
     if curent_pipes[0]["x"] > 0:
         for p in curent_pipes:
             p['x'] -= 1
@@ -168,15 +168,18 @@ def pipe_movement():
 #     pipe_order_list[starting_position_in_pol]
 
 def pick_next_pipe( pipe_order_list , pipes_order_in_list , position_in_pol, position_in_poll):
-    current_poll = pipe_order_list[position_in_pol]
     position_in_poll += 1
-    if position_in_pol > 3:
-        position_in_pol = 0
+
+    if position_in_poll > 3:
+        position_in_poll = 0
         position_in_pol = (position_in_pol + 1) % 5
-        position_in_pol += 1
+
+    actual_pipe_set = pipes_order_in_list[position_in_pol]
+    new_pipe_index = actual_pipe_set[position_in_poll][0]
+    
     game_data["current_order"] = position_in_pol
     game_data["current_pipe"] = position_in_poll
-    game_data["next_pipe"] = [position_in_pol, position_in_poll]
+    game_data["next_pipe"] = [new_pipe_index, position_in_poll]
 
     
 
@@ -197,7 +200,7 @@ def run_game(stdscr):
             move_player(key)
             draw_board(stdscr)
             pipe_movement()
-            if any(o['x'] == game_data["player"]["x"] and o['y'] == game_data["player"]["y"] for o in game_data['pipes'][game_data['next_pipe'][1]]) or game_data["player"]["y"] == 10:
+            if any(o['x'] == game_data["player"]["x"] and o['y'] == game_data["player"]["y"] for o in game_data['pipes'][game_data['next_pipe'][0]]) or game_data["player"]["y"] == 10:
                 break
             time.sleep(.2)
             

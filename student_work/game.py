@@ -3,6 +3,7 @@
 import curses
 import time
 import random 
+import asyncio
 
 game_data = {
     # Store board dimensions, player/enemy positions, score, energy, collectibles, and icons
@@ -190,9 +191,10 @@ def run_game(stdscr):
     #draw_board(stdscr) # prints board 
     while True:
         try: 
+            asyncio.sleep(.4)
             key = stdscr.getkey()
         except: #basic data filterin
-            key = None
+            key = "a string"
         if key:
             if key.lower() == "q": # if input is q then break
                 break
@@ -202,7 +204,7 @@ def run_game(stdscr):
             pipe_movement()
             if any(o['x'] == game_data["player"]["x"] and o['y'] == game_data["player"]["y"] for o in game_data['pipes'][game_data['next_pipe'][0]]) or game_data["player"]["y"] == 10:
                 break
-            time.sleep(.2)
+            time.sleep(.4)
             
 curses.wrapper(run_game)
 #pipe_movement()
